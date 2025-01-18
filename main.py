@@ -1,7 +1,7 @@
 import discord, os, logic as l
 from dotenv import load_dotenv
 from discord.ext import commands
-
+import commandapi as c
 load_dotenv()
 token = os.getenv("dt")
 
@@ -36,6 +36,23 @@ async def joined(ctx, member: discord.Member):
 async def roll(ctx, dice: str):
     dado = l.roll(dice)
     await ctx.send(f'Resultado--> {dado}')
+
+@bot.command(name='meme')
+async def img_meme(ctx):
+    x = l.meme()
+    await ctx.send(file = x)
+
+@bot.command(name='memes')
+async def img_memes(ctx):
+    x = l.memes()
+    await ctx.send(file = x)
+
+@bot.command('duck')
+async def duck(ctx):
+    '''Una vez que llamamos al comando duck, 
+    el programa llama a la función get_duck_image_url'''
+    image_url = c.duck_img()
+    await ctx.send(image_url)
 
 bot.run(token)
 
